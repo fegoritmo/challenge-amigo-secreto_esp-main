@@ -6,27 +6,24 @@ let amigos = [];
 // Función para agregar un amigo
 function agregarAmigo() {
     // Capturar el valor del campo de entrada
-    const inputNombre = document.getElementById('amigo');
-    const nombre = inputNombre.value.trim();
+    const inputNombre = document.getElementById('amigo').value.trim();
 
     // Validar la entrada
-    if (nombre === "") {
+    if (inputNombre === "") {
         alert("Por favor, inserte un nombre.");
         return;
     }
 
     // Actualizar el array de amigos
-    amigos.push(nombre);
+    amigos.push(inputNombre);
 
-    // Limpiar el campo de entrada
-    inputNombre.value = "";
-
-    // Mostrar la lista actualizada
-    mostrarListaAmigos();
+    // Limpiar campos y mostrar lista actualizada
+    limpiarCampos('lista');
 }
 
 // Función para mostrar la lista de amigos en el HTML
 function mostrarListaAmigos() {
+    // Obtener el elemento de la lista en el HTML
     const lista = document.getElementById('listaAmigos');
 
     // Limpiar la lista existente
@@ -38,9 +35,6 @@ function mostrarListaAmigos() {
         li.textContent = amigos[i];
         lista.appendChild(li);
     }
-
-    // Limpiar la lista de resultado
-    resultado.innerHTML = "";
 }
 
 // Función para sortear un amigo aleatorio
@@ -60,9 +54,25 @@ function sortearAmigo() {
     // Mostrar el resultado en el elemento correspondiente
     resultado.innerHTML = `<li>Amigo seleccionado: ${nombreSorteado}</li>`;
 
-    // Limpiar la lista de amigos después de sortear
-    listaAmigos.innerHTML = "";
+    // Limpiar lista y array de amigos
+    limpiarCampos('todo');
+}
 
-    // Limpiar el array de amigos
-    amigos = [];
+// Función para limpiar campos
+function limpiarCampos(tipo) {
+    // Obtener elementos del DOM
+    const input = document.getElementById('amigo');
+    const lista = document.getElementById('listaAmigos');
+    const resultado = document.getElementById('resultado');
+
+    // Limpiar campos según el tipo especificado
+    if (tipo === 'lista') {
+        input.value = "";
+        mostrarListaAmigos();
+    } else if (tipo === 'resultado') {
+        resultado.innerHTML = "";
+    } else if (tipo === 'todo') {
+        lista.innerHTML = "";
+        amigos = [];
+    }
 }
