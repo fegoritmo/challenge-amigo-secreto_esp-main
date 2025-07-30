@@ -38,6 +38,9 @@ function mostrarListaAmigos() {
         li.textContent = amigos[i];
         lista.appendChild(li);
     }
+
+    // Limpiar la lista de resultado
+    resultado.innerHTML = "";
 }
 
 // Función para sortear un amigo aleatorio
@@ -55,6 +58,11 @@ function sortearAmigo() {
     const nombreSorteado = amigos[indice];
 
     // Mostrar el resultado en el elemento correspondiente
-    const resultado = document.getElementById('resultado');
-    resultado.innerHTML = `<li>${nombreSorteado}</li>`;
+    resultado.innerHTML = `<li>Amigo seleccionado: ${nombreSorteado}</li>`;
+
+    // Limpiar la lista de amigos después de sortear
+    listaAmigos.innerHTML = "";
+
+    // Limpiar el array de amigos
+    amigos = [];
 }
